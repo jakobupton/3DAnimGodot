@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c700pjn84lp4f"]
+
+[ext_resource type="PackedScene" uid="uid://d1p66onp0vo8q" path="res://robot_arm.tscn" id="1_sb113"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fwl0a"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_0i8xk"]
+sky_material = SubResource("ProceduralSkyMaterial_fwl0a")
+
+[sub_resource type="Environment" id="Environment_qusxx"]
+background_mode = 2
+sky = SubResource("Sky_0i8xk")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="origin" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qusxx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.317418, -0.0834691, 0.944605, -0.0265874, 0.99651, 0.0791215, -0.947913, 0, -0.318529, 2.78126, 1.88593, -1.79541)
+
+[node name="arm" parent="." instance=ExtResource("1_sb113")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0726399, 0, -0.0132054)
