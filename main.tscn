@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c700pjn84lp4f"]
+[gd_scene load_steps=11 format=3 uid="uid://c700pjn84lp4f"]
 
 [ext_resource type="PackedScene" uid="uid://d1p66onp0vo8q" path="res://robot_arm.tscn" id="1_sb113"]
+[ext_resource type="Script" path="res://ArmControl.cs" id="2_swran"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fwl0a"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -37,9 +38,11 @@ shadow_enabled = true
 environment = SubResource("Environment_qusxx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.999975, -0.00674089, 0.00212695, -0.0052265, 0.907709, 0.419568, -0.00475891, 0.419547, -0.907721, 0, 1.83609, -4.29972)
+transform = Transform3D(-0.999975, -0.00674089, 0.00212694, -0.00567581, 0.945084, 0.326778, -0.00421292, 0.326758, -0.945099, 0, 3.01344, -6.16135)
 
 [node name="arm" parent="." instance=ExtResource("1_sb113")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04186, 0, 0)
+script = ExtResource("2_swran")
 
 [node name="Box1" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.751, 0.529, -1.469)
@@ -150,12 +153,10 @@ transform = Transform3D(-6.55671e-08, -1.5, -6.55671e-08, 0, -6.55671e-08, 1.5, 
 shape = SubResource("BoxShape3D_dbmxy")
 
 [node name="ball" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.720791, 0.80008, -1.24194)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02993, 0.80008, -1.2885)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ball"]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 mesh = SubResource("SphereMesh_mhnro")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ball"]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 shape = SubResource("SphereShape3D_dknfb")
