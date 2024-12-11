@@ -8,6 +8,7 @@ public partial class ArmControl : Node3D
     private Node3D _ball;
     private Area3D _grabArea;
     private bool _isHoldingBall = false;
+    private bool _canGrabBall = false;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -17,8 +18,9 @@ public partial class ArmControl : Node3D
         _grabArea = GetNode<Area3D>("Armature/Skeleton3D/BoneAttachment3D/Area3D");
         _ball = GetNode<Node3D>("../ball");
 
-        // Connect the Area3D's signal
+        // get signal entry and exit signal from area3d of armend
         _grabArea.BodyEntered += OnBodyEntered;
+        _grabArea.BodyExited += OnBodyExited;
 
         _animationPlayer.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
         _animationPlayer.Play("idle");
@@ -26,10 +28,19 @@ public partial class ArmControl : Node3D
 
         private void OnBodyEntered(Node3D body)
     {
-        if (body == _ball && !_isHoldingBall)
+        if (body == _ball)
         {
             GD.Print("Ball entered the grabbing area!");
-            _isHoldingBall = true;
+            _canGrabBall = true;
+        }
+    }
+
+    private void OnBodyExited(Node3D body)
+    {
+        if (body == _ball)
+        {
+            GD.Print("Ball exited the grabbing area!");
+            _canGrabBall = false;
         }
     }
 
@@ -57,16 +68,21 @@ public partial class ArmControl : Node3D
     }
     private void OnAnimationFinished(string animName)
     {
-        if (animName == "grab" && !_isHoldingBall)
+        if (animName == "grab" && _canGrabBall && !_isHoldingBall)
         {
+            // set _isHoldingBall to true if the ball is in the grab area
             _isHoldingBall = true;
+            GD.Print("Grab animation finished and ball is held.");
         }
         else if (animName == "letgo" && _isHoldingBall)
         {
             _isHoldingBall = false;
-             Vector3 bonePosition = _skeleton.GetBoneGlobalPose(_skeleton.FindBone("armend")).Origin;
+            GD.Print("Letgo animation finished, ball released.");
+
+            // Drop the ball
+            Vector3 bonePosition = _skeleton.GetBoneGlobalPose(_skeleton.FindBone("armend")).Origin;
             _ball.GlobalPosition = bonePosition + new Vector3(1, -1, 0);
-            //offseting for the same reason as above
+            // offsetting for same reason as above
         }
     }
 }
