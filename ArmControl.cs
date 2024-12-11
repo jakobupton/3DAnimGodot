@@ -68,12 +68,19 @@ public partial class ArmControl : Node3D
     }
     private void OnAnimationFinished(string animName)
     {
-        if (animName == "grab" && _canGrabBall && !_isHoldingBall)
+        if (animName == "grab")
         {
-            // set _isHoldingBall to true if the ball is in the grab area
-            _isHoldingBall = true;
-            GD.Print("Grab animation finished and ball is held.");
+            if (_canGrabBall && !_isHoldingBall)
+            {
+                // Set _isHoldingBall to true if the ball is in the grab area
+                _isHoldingBall = true;
+                GD.Print("Grab animation finished and ball is held.");
+            }
+        
+            //play pickup animation
+            _animationPlayer.Play("pickup");
         }
+
         else if (animName == "letgo" && _isHoldingBall)
         {
             _isHoldingBall = false;
