@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1p66onp0vo8q"]
+[gd_scene load_steps=4 format=3 uid="uid://d1p66onp0vo8q"]
 
 [ext_resource type="PackedScene" uid="uid://bm648mhyelmcf" path="res://arm.glb" id="1_l83x4"]
 [ext_resource type="Script" path="res://play.gd" id="2_ww2fj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4nt3x"]
 
 [node name="arm" instance=ExtResource("1_l83x4")]
 script = ExtResource("2_ww2fj")
@@ -12,7 +14,7 @@ bones/0/scale = Vector3(1, 1, 1)
 bones/1/rotation = Quaternion(-0.0459661, -9.72478e-08, -6.53722e-09, 0.998943)
 bones/2/rotation = Quaternion(-0.00241425, -1.0946e-14, 5.97526e-17, 0.999997)
 bones/2/scale = Vector3(1, 1, 1)
-bones/3/rotation = Quaternion(0.724425, -2.09596e-07, -1.88582e-07, 0.689354)
+bones/3/rotation = Quaternion(0.727791, -1.93485e-07, -2.05332e-07, 0.685799)
 bones/4/rotation = Quaternion(0.92388, -0.382683, -2.24404e-07, 1.20131e-07)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/rotation = Quaternion(0.92388, 0.382683, -2.38171e-07, -1.20131e-07)
@@ -20,3 +22,14 @@ bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(0.707107, -2.21973e-07, -2.21973e-07, 0.707107)
 bones/7/rotation = Quaternion(0.707107, -2.21973e-07, -2.21973e-07, 0.707107)
 bones/8/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 4.36506e-08, -5.6675e-07, -5.66295e-07, -0.00979211, -0.999952, -4.91982e-08, 0.999952, -0.00979211, 8.9373e-14, 3.99964, 1.73636e-05)
+bone_name = "armend"
+bone_idx = 3
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D/Area3D" index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_4nt3x")
