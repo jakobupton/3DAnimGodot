@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://c700pjn84lp4f"]
+[gd_scene load_steps=12 format=3 uid="uid://c700pjn84lp4f"]
 
+[ext_resource type="Script" path="res://Camera3d.cs" id="1_l0alh"]
 [ext_resource type="PackedScene" uid="uid://d1p66onp0vo8q" path="res://robot_arm.tscn" id="1_sb113"]
 [ext_resource type="Script" path="res://ArmControl.cs" id="2_swran"]
 
@@ -39,6 +40,7 @@ environment = SubResource("Environment_qusxx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.999975, -0.00674089, 0.00212694, -0.00567581, 0.945084, 0.326778, -0.00421292, 0.326758, -0.945099, 0, 3.01344, -6.16135)
+script = ExtResource("1_l0alh")
 
 [node name="arm" parent="." instance=ExtResource("1_sb113")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04186, 0, 0)

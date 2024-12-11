@@ -1,8 +1,0 @@
-ea4bc82a6ad023ab7ee23ee620429895
-::res://::1733535578
-arm.glb::PackedScene::3294502883904506193::1732130257::1732130400::1::::<><>::
-icon.svg::CompressedTexture2D::8548030750168265125::1732130257::1732130400::1::::<><>::
-main.tscn::PackedScene::7072039013713649955::1733002081::0::1::::<><>::uid://d1p66onp0vo8q::::res://robot_arm.tscn
-play.gd::GDScript::-1::1732130257::0::1::::<>Node3D<>::
-README.md::TextFile::-1::1732130098::0::1::::<><>::
-robot_arm.tscn::PackedScene::9017075994490995842::1732998887::0::1::::<><>::uid://bm648mhyelmcf::::res://arm.glb<>res://play.gd
