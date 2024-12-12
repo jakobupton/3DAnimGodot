@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://uubw5x10q1qv"
+path="res://.godot/imported/ballsink.obj-32f5538972f61f2a894ad8d3bcbb172b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ballsink.obj-32f5538972f61f2a894ad8d3bcbb172b.mesh"]
+
+source_file="res://ballsink.obj"
+dest_files=["res://.godot/imported/ballsink.obj-32f5538972f61f2a894ad8d3bcbb172b.mesh", "res://.godot/imported/ballsink.obj-32f5538972f61f2a894ad8d3bcbb172b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

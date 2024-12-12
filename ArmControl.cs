@@ -16,7 +16,7 @@ public partial class ArmControl : Node3D
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _skeleton = GetNode<Skeleton3D>("Armature/Skeleton3D");
         _grabArea = GetNode<Area3D>("Armature/Skeleton3D/BoneAttachment3D/Area3D");
-        _ball = GetNode<Node3D>("../ball");
+        _ball = GetNode<Node3D>("../PrizeBall");
 
         // get signal entry and exit signal from area3d of armend
         _grabArea.BodyEntered += OnBodyEntered;
