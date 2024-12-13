@@ -75,3 +75,13 @@ shape = SubResource("ConcavePolygonShape3D_kh3ay")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BallSink2/CollisionShape3D"]
 mesh = ExtResource("4_3owqo")
 skeleton = NodePath("../../..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+modulate = Color(0, 1, 0, 1)
+offset_right = 76.0
+offset_bottom = 28.0
+scale = Vector2(2, 2)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "SCORE: 0"
