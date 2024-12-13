@@ -41,12 +41,23 @@ public partial class ArmControl : Node3D
 	}
 
 	private void OnBodyEntered(Node3D body)
-	{
-		if (body == _ball)
-		{
-			GD.Print("Ball entered the grabbing area!");
-			_canGrabBall = true;
-		}
+	{	
+    	const float tolerance = 1000.0f;
+        Vector3 bodyPosition = _grabArea.GlobalPosition;
+        Vector3 ballPosition = _ball.GlobalPosition;
+
+        float distance = bodyPosition.DistanceTo(ballPosition);
+
+        // idk why this doesn't work lol
+        if (distance <= tolerance)
+        {
+            GD.Print("Ball entered the grabbing area!");
+            _canGrabBall = true;
+        }
+        else
+        {
+            GD.Print("Ball is close but outside the tolerance range.");
+        }
 	}
 
 	private void OnBodyExited(Node3D body)
@@ -63,23 +74,25 @@ public partial class ArmControl : Node3D
 		// Handle grabbing and letting go
 		if (Input.IsKeyPressed(Key.Space))
 		{
-			_animationPlayer.Play("grab");
-		}
-
-		if (Input.IsKeyPressed(Key.Enter))
-		{
-			_animationPlayer.Play("letgo");
+			if (_isHoldingBall)
+			{
+				_animationPlayer.Play("letgo", -1, 2.0f);
+			}
+			else
+			{
+				_animationPlayer.Play("grab", -1, 2.0f);
+			}
 		}
 
 		// Handle arm swiveling
 		if (Input.IsKeyPressed(Key.Q))
 		{
-			RotateArm(-_rotationSpeed * (float)delta);
+			RotateArm(_rotationSpeed * (float)delta);
 		}
 
 		if (Input.IsKeyPressed(Key.E))
 		{
-			RotateArm(_rotationSpeed * (float)delta);
+			RotateArm(-_rotationSpeed * (float)delta);
 		}
 
 		var acceleration = new Vector3(0, 0, 0);
@@ -120,15 +133,14 @@ public partial class ArmControl : Node3D
 		// Update ball position if held
 		if (_isHoldingBall && _ball != null)
 		{
-			//Get the armend bone's global transform
-			Transform3D armEndTransform = _skeleton.GetBoneGlobalPose(_skeleton.FindBone("armend"));
+			Transform3D armEndBoneTransform = _skeleton.GetBoneGlobalPose(_skeleton.FindBone("armend"));
+			Vector3 globalArmEndPosition = _skeleton.GlobalTransform * armEndBoneTransform.Origin;
+			// Vector3 globalArmEndDirection = _skeleton.GlobalRotation;
 
-			//transform ball's position relative to armend
-			Vector3 transformedPosition = GlobalTransform * armEndTransform.Origin;
-
-			//offset for ball to be slightly below armend
-			_ball.GlobalPosition = transformedPosition + new Vector3(0, -0.5f, 0);
+			// sets the ball position to line up with the arm end while rotated
+			_ball.GlobalPosition = globalArmEndPosition + new Vector3(0, -0.5f, 0);
 		}
+
 	}
 
 	private void RotateArm(float deltaRotation)
@@ -154,7 +166,7 @@ public partial class ArmControl : Node3D
 			}
 
 			// Play the pickup animation
-			_animationPlayer.Play("pickup");
+			_animationPlayer.Play("pickup", -1, 2.0f);
 		}
 		else if (animName == "letgo" && _isHoldingBall)
 		{
@@ -168,7 +180,15 @@ public partial class ArmControl : Node3D
 			Vector3 globalArmEndPosition = _skeleton.GlobalTransform * armEndBoneTransform.Origin;
 
 			// Set the ball's global position
-			_ball.GlobalPosition = globalArmEndPosition;
+			_ball.GlobalPosition = globalArmEndPosition + new Vector3(0, -0.5f, 0);
+			
+
+			// casts the ball to a rigid body and sets velocity to 0 to prevent the exploding ball 
+			// has to be in an if statement ig 
+			if (_ball is RigidBody3D ball)
+			{
+				ball.LinearVelocity = new Vector3(0, 0, 0);
+			}
 
 			GD.Print($"Ball released at position: {_ball.GlobalPosition}");
 		}
