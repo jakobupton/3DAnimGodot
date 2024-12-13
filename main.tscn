@@ -99,8 +99,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0479568, 0, 2.41393)
 script = ExtResource("2_swran")
 
 [node name="PrizeBall" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.10401, 2.62841, -0.291042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61636, 2.62841, 1.24698)
+mass = 0.027
 physics_material_override = SubResource("PhysicsMaterial_srd6f")
+gravity_scale = 0.086
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PrizeBall"]
 shape = SubResource("SphereShape3D_5oth5")
