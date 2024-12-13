@@ -4,13 +4,17 @@ using System;
 public partial class Camera3d : Camera3D
 {
 	// Horizontal angle of the camera (movement along the xz-plane)
-	float _angle;
+	float _angle = Mathf.Pi / 4;
 
-	// Vertical angle of the camera (movement along the y-axis)
-	float _yangle;
+	// For interpolation
+	float _targetAngle = Mathf.Pi / 4;
 
 	// Distance from the center
 	float DISTANCE = 5;
+
+	public float GetAngle() {
+		return _angle;
+	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -26,16 +30,12 @@ public partial class Camera3d : Camera3D
 			{
 				GetTree().Quit();
 			}
-		}
-
-		if (@event is InputEventMouseMotion mouseEvent)
-		{
-			// Rotate camera
-			_angle += mouseEvent.Relative.X * 0.005f;
-			_yangle -= mouseEvent.Relative.Y * 0.005f;
-
-			// Clamp vertical angle
-			_yangle = Mathf.Clamp(_yangle, -Mathf.Pi / 6, Mathf.Pi / 6);
+		} else if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed) {
+			if (mouseEvent.ButtonIndex == MouseButton.Left) {
+				_targetAngle += Mathf.Pi / 2;
+			} else if (mouseEvent.ButtonIndex == MouseButton.Right) {
+				_targetAngle -= Mathf.Pi / 2;
+			}
 		}
 
 		// Zoom in and out implementations
@@ -60,12 +60,17 @@ public partial class Camera3d : Camera3D
 			DISTANCE += panEvent.Delta.Y * 0.1f;
 			DISTANCE = Mathf.Clamp(DISTANCE, 1, 10);
 		}
+	}
+	
+	public override void _Process(double delta) {
+		// Interpolate camera movement
+		_angle += (_targetAngle - _angle) * 2.5f * (float)delta;
 
 		// Move camera
 		var centre = new Vector3(0, 1, 0);
 		Position = centre + new Vector3(
 			DISTANCE * Mathf.Cos(_angle),
-			DISTANCE * Mathf.Tan(_yangle),
+			3,
 			DISTANCE * Mathf.Sin(_angle)
 		);
 
