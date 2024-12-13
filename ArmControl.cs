@@ -20,7 +20,7 @@ public partial class ArmControl : Node3D
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _skeleton = GetNode<Skeleton3D>("Armature/Skeleton3D");
         _grabArea = GetNode<Area3D>("Armature/Skeleton3D/BoneAttachment3D/Area3D");
-        _ball = GetNode<Node3D>("../ball");
+        _ball = GetNode<Node3D>("../PrizeBall");
 
         // Connect signals for grab area
         _grabArea.BodyEntered += OnBodyEntered;
@@ -78,8 +78,14 @@ public partial class ArmControl : Node3D
         // Update ball position if held
         if (_isHoldingBall && _ball != null)
         {
-            Vector3 armEndPosition = _skeleton.GetBoneGlobalPose(_skeleton.FindBone("armend")).Origin;
-            _ball.GlobalPosition = armEndPosition + new Vector3(1, -0.5f, 0);
+            //Get the armend bone's global transform
+            Transform3D armEndTransform = _skeleton.GetBoneGlobalPose(_skeleton.FindBone("armend"));
+
+            //transform ball's position relative to armend
+            Vector3 transformedPosition = GlobalTransform * armEndTransform.Origin;
+
+            //offset for ball to be slightly below armend
+            _ball.GlobalPosition = transformedPosition + new Vector3(0, -0.5f, 0);
         }
     }
 
