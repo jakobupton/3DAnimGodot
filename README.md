@@ -1,11 +1,11 @@
 # 3D Animation based in Godot .NET
 ## Contributions 
-- **Paolo Mazzon**:
+- **Paolo Mazzon**: Arm movement, 3D Modelling 
 - **Jakob Upton**:
-- **Wilson Agyapong**:
+- **Wilson Agyapong**: Landscape & Environment Modelling/Texturing, 
 - **Isaac Mrowka**:
-- **Steven Furlong**:
-- **Jasjeet Singh**:
+- **Steven Furlong**: Arm movement (left/right, bound to a/d), Score Counter, Ball Reset Delay
+- **Jasjeet Singh**: Celebratory Confetti 
 - **Dewang Marya**:
 
 ## Test Plan
