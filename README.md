@@ -1,12 +1,12 @@
 # 3D Animation based in Godot .NET
 ## Contributions 
-- **Paolo Mazzon**:
-- **Jakob Upton**:
-- **Wilson Agyapong**:
-- **Isaac Mrowka**:
-- **Steven Furlong**:
-- **Jasjeet Singh**:
-- **Dewang Marya**:
+- **Paolo Mazzon**: Sink 3D model, camera controls, arm movement, polish
+- **Jakob Upton**: Physics and arm movement
+- **Wilson Agyapong**: Environment/Texture Building
+- **Isaac Mrowka**: Added initial scene
+- **Steven Furlong**: Score Counter Creation, Arm Movement
+- **Jasjeet Singh**: Confetti Celebration
+- **Dewang Marya**: Animation control, arm-ball handling
 
 ## Test Plan
 We tested by enforcing pull requests to ensure consistent behavior across every users machine.

@@ -10,7 +10,7 @@ public partial class Camera3d : Camera3D
 	float _targetAngle = Mathf.Pi / 4;
 
 	// Distance from the center
-	float DISTANCE = 5;
+	float DISTANCE = 6;
 
 	public float GetAngle() {
 		return _angle;
@@ -70,11 +70,11 @@ public partial class Camera3d : Camera3D
 		var centre = new Vector3(0, 1, 0);
 		Position = centre + new Vector3(
 			DISTANCE * Mathf.Cos(_angle),
-			3,
+			5,
 			DISTANCE * Mathf.Sin(_angle)
 		);
 
 		// Look at center
-		LookAt(centre);
+		LookAt(centre - new Vector3(0, 2, 0));
 	}
 }
