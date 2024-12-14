@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://c700pjn84lp4f"]
+[gd_scene load_steps=46 format=3 uid="uid://c700pjn84lp4f"]
 
 [ext_resource type="Script" path="res://Camera3d.cs" id="1_l0alh"]
 [ext_resource type="PackedScene" uid="uid://d1p66onp0vo8q" path="res://robot_arm.tscn" id="1_sb113"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://ballsinkdetection.cs" id="8_bwq4n"]
 [ext_resource type="Texture2D" uid="uid://dfrf4jusjj0rn" path="res://textures/Tiles040_1K-JPG_Color.jpg" id="8_eskx2"]
 [ext_resource type="Texture2D" uid="uid://bw3fqq1d238ej" path="res://textures/OfficeCeiling002_1K-JPG_Color.jpg" id="9_eswtk"]
+[ext_resource type="Texture2D" uid="uid://cwdcndt43k28a" path="res://tutorial.png" id="12_wmg7g"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5wngm"]
 panorama = ExtResource("2_s6tow")
@@ -323,6 +324,13 @@ offset_top = -16.0
 offset_right = 82.0
 offset_bottom = 25.0
 label_settings = SubResource("LabelSettings_qy4ra")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+layout_direction = 3
+offset_left = -8.0
+offset_right = 282.0
+offset_bottom = 225.0
+texture = ExtResource("12_wmg7g")
 
 [node name="confetti" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, 0)
