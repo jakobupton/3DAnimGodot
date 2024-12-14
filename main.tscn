@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c700pjn84lp4f"]
+[gd_scene load_steps=35 format=3 uid="uid://c700pjn84lp4f"]
 
 [ext_resource type="Script" path="res://Camera3d.cs" id="1_l0alh"]
 [ext_resource type="PackedScene" uid="uid://d1p66onp0vo8q" path="res://robot_arm.tscn" id="1_sb113"]
@@ -26,6 +26,7 @@ friction = 0.68
 bounce = 0.52
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5oth5"]
+radius = 0.304962
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7n3y"]
 albedo_texture = ExtResource("5_iegdf")
@@ -38,6 +39,9 @@ data = PackedVector3Array(-2.7, 0.1116, -2.7, 2.7, 0.1116, -2.7, -1.0338, -0.466
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qq76n"]
 albedo_texture = ExtResource("6_nh7x4")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tvwyd"]
+size = Vector3(5.39613, 0.629395, 5.39746)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jbweq"]
 
@@ -131,6 +135,12 @@ shape = SubResource("ConcavePolygonShape3D_kh3ay")
 mesh = ExtResource("4_3owqo")
 skeleton = NodePath("../../..")
 
+[node name="Area3D" type="Area3D" parent="BallSink2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BallSink2/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00618744, -0.198975, 0.00122076)
+shape = SubResource("BoxShape3D_tvwyd")
+
 [node name="room" type="Node3D" parent="."]
 
 [node name="floor" type="StaticBody3D" parent="room"]
@@ -217,14 +227,16 @@ mesh = SubResource("BoxMesh_euyoy")
 [node name="tabletop" type="StaticBody3D" parent="table"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="table/tabletop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.887985, 0)
 shape = SubResource("BoxShape3D_vn3u3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="table/tabletop/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27807, -0.620451, 0.0350385)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27807, 0.293176, 0.0350385)
 mesh = SubResource("BoxMesh_3ahly")
 skeleton = NodePath("../../..")
 
 [node name="leg" type="StaticBody3D" parent="table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.584692, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="table/leg"]
 shape = SubResource("BoxShape3D_xsfax")
