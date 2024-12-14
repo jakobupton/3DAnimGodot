@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c700pjn84lp4f"]
+[gd_scene load_steps=45 format=3 uid="uid://c700pjn84lp4f"]
 
 [ext_resource type="Script" path="res://Camera3d.cs" id="1_l0alh"]
 [ext_resource type="PackedScene" uid="uid://d1p66onp0vo8q" path="res://robot_arm.tscn" id="1_sb113"]
@@ -86,6 +86,13 @@ albedo_texture = ExtResource("6_kxgq1")
 material = SubResource("StandardMaterial3D_d1pva")
 size = Vector3(12, 0.2, 7)
 
+[sub_resource type="SystemFont" id="SystemFont_ihgdo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qy4ra"]
+line_spacing = 0.0
+font = SubResource("SystemFont_ihgdo")
+font_size = 60
+
 [sub_resource type="Gradient" id="Gradient_u2xux"]
 offsets = PackedFloat32Array(0, 0.556782, 0.791798, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.556782, 0.556782, 0.556782, 0.443218, 0.791798, 0.791798, 0.791798, 0.208202, 1, 1, 1, 0)
@@ -127,24 +134,25 @@ material = SubResource("StandardMaterial3D_4ebv3")
 shape = 0
 
 [node name="origin" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.134194)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -0.993903, 4.73617, 2.41393)
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -0.993903, 4.73617, 3.18922)
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.999975, -0.00674089, 0.00212695, -0.00567581, 0.945084, 0.326778, -0.00421292, 0.326758, -0.945099, -0.993903, 3.01344, -3.74742)
+transform = Transform3D(-0.999975, -0.00674089, 0.00212695, -0.00567581, 0.945084, 0.326778, -0.00421292, 0.326758, -0.945099, -0.993903, 3.01344, -2.97213)
 script = ExtResource("1_l0alh")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Camera3D"]
 environment = SubResource("Environment_0027f")
 
 [node name="arm" parent="." instance=ExtResource("1_sb113")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0479568, -0.313932, 2.41393)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0479568, -0.313932, 3.18922)
 script = ExtResource("2_swran")
 
 [node name="PrizeBall" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61636, 2.62841, 1.24698)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61636, 2.62841, 2.02227)
 physics_material_override = SubResource("PhysicsMaterial_srd6f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PrizeBall"]
@@ -156,7 +164,7 @@ mesh = SubResource("SphereMesh_ekb3b")
 skeleton = NodePath("../..")
 
 [node name="BallSink" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7327, 0, -0.579737)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7327, 0, 0.195554)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BallSink"]
 shape = SubResource("ConcavePolygonShape3D_kh3ay")
@@ -167,7 +175,7 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_qq76n")
 
 [node name="BallSink2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6567, 0, -0.579737)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6567, 0, 0.195554)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BallSink2"]
 shape = SubResource("ConcavePolygonShape3D_kh3ay")
@@ -184,6 +192,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006, -0.199, 0.001)
 shape = SubResource("BoxShape3D_tvwyd")
 
 [node name="room" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.775291)
 
 [node name="floor" type="StaticBody3D" parent="room"]
 
@@ -192,7 +201,7 @@ transform = Transform3D(0.99992, 0.00044176, -0.012663, 0.0126708, -0.0348618, 0
 shape = SubResource("ConvexPolygonShape3D_jbweq")
 
 [node name="floormesh" type="MeshInstance3D" parent="room/floor/CollisionShape3D"]
-transform = Transform3D(1, -4.65661e-10, 9.31323e-09, -9.30261e-10, 0.999999, -5.58794e-08, -3.04223e-11, 1.49012e-08, 0.999999, -11.7631, -0.122623, -3.91182)
+transform = Transform3D(1, 0.000358608, 7.44126e-06, -0.000358256, 0.999598, -0.0283032, -1.75781e-05, 0.0283032, 0.999598, -11.7631, -0.122623, -3.91182)
 mesh = SubResource("QuadMesh_p57f3")
 skeleton = NodePath("../../..")
 
@@ -254,7 +263,7 @@ mesh = SubResource("QuadMesh_yjobp")
 skeleton = NodePath("../..")
 
 [node name="table" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.264303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.510988)
 
 [node name="leg3" type="StaticBody3D" parent="table"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.54933, 0, 4.38267)
@@ -284,7 +293,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.584692, 0)
 shape = SubResource("BoxShape3D_xsfax")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="table/leg/CollisionShape3D"]
-transform = Transform3D(0.999497, -0.0317073, 0, 0.0317073, 0.999497, 0, 0, 0, 1, -4.22637, -2.65822, -2.02595)
+transform = Transform3D(0.999497, -0.0317073, 0, 0.0317073, 0.999497, 0, 0, 0, 1, -4.22637, -1.91621, -2.02595)
 mesh = SubResource("BoxMesh_euyoy")
 
 [node name="leg2" type="StaticBody3D" parent="table"]
@@ -310,9 +319,10 @@ mesh = SubResource("BoxMesh_euyoy")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_top = -16.0
 offset_right = 82.0
-offset_bottom = 34.0
-scale = Vector2(2, 2)
+offset_bottom = 25.0
+label_settings = SubResource("LabelSettings_qy4ra")
 
 [node name="confetti" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, 0)
