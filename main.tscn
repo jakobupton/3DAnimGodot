@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c700pjn84lp4f"]
+[gd_scene load_steps=36 format=3 uid="uid://c700pjn84lp4f"]
 
 [ext_resource type="Script" path="res://Camera3d.cs" id="1_l0alh"]
 [ext_resource type="PackedScene" uid="uid://d1p66onp0vo8q" path="res://robot_arm.tscn" id="1_sb113"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bdgnlcbty020b" path="res://textures/running_track_diff_4k.jpg" id="5_iegdf"]
 [ext_resource type="Texture2D" uid="uid://c58rucw37ejxj" path="res://textures/Planks023B_1K-JPG_Color.jpg" id="6_kxgq1"]
 [ext_resource type="Texture2D" uid="uid://d31ofmvqmiclt" path="res://textures/Metal055A.png" id="6_nh7x4"]
+[ext_resource type="Script" path="res://ballsinkdetection.cs" id="8_bwq4n"]
 [ext_resource type="Texture2D" uid="uid://dfrf4jusjj0rn" path="res://textures/Tiles040_1K-JPG_Color.jpg" id="8_eskx2"]
 [ext_resource type="Texture2D" uid="uid://bw3fqq1d238ej" path="res://textures/OfficeCeiling002_1K-JPG_Color.jpg" id="9_eswtk"]
 
@@ -136,9 +137,10 @@ mesh = ExtResource("4_3owqo")
 skeleton = NodePath("../../..")
 
 [node name="Area3D" type="Area3D" parent="BallSink2"]
+script = ExtResource("8_bwq4n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BallSink2/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00618744, -0.198975, 0.00122076)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006, -0.199, 0.001)
 shape = SubResource("BoxShape3D_tvwyd")
 
 [node name="room" type="Node3D" parent="."]
