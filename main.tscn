@@ -266,3 +266,10 @@ shape = SubResource("BoxShape3D_xsfax")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="table/leg4/CollisionShape3D"]
 transform = Transform3D(0.999497, -0.0317073, 0, 0.0317073, 0.999497, 0, 0, 0, 1, -4.22637, -2.65822, -2.02595)
 mesh = SubResource("BoxMesh_euyoy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_right = 82.0
+offset_bottom = 34.0
+scale = Vector2(2, 2)
