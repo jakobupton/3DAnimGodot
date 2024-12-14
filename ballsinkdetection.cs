@@ -25,7 +25,16 @@ public partial class ballsinkdetection : Area3D
 		UpdateScoreLabel();
 	}
 
-	private void OnBodyEntered(Node body)
+    public override void _Process(double delta)
+    {
+        // reset the ball if it falls below the sink
+		if (prizeBall.Position.Y < -5)
+		{
+			RespawnPrizeBall(prizeBall);
+		}
+    }
+
+    private void OnBodyEntered(Node body)
 	{
 		// Check if the body is the PrizeBall
 		if (body == prizeBall)
@@ -48,13 +57,12 @@ public partial class ballsinkdetection : Area3D
 	{
 		// Wait for 3 seconds
 		await ToSignal(GetTree().CreateTimer(1.5), "timeout");
-
 		// Reset position
 		prizeBall.GlobalTransform = new Transform3D(prizeBall.GlobalTransform.Basis, SpawnPosition);
 
 		// Reset velocity other than vertical
 		Vector3 currentVelocity = prizeBall.LinearVelocity;
-		prizeBall.LinearVelocity = new Vector3(0, currentVelocity.Y, 0);
+		prizeBall.LinearVelocity = new Vector3(0, 0, 0);
 
 		GD.Print("PrizeBall respawned at: " + SpawnPosition);
 	}
