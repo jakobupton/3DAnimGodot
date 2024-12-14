@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c700pjn84lp4f"]
+[gd_scene load_steps=43 format=3 uid="uid://c700pjn84lp4f"]
 
 [ext_resource type="Script" path="res://Camera3d.cs" id="1_l0alh"]
 [ext_resource type="PackedScene" uid="uid://d1p66onp0vo8q" path="res://robot_arm.tscn" id="1_sb113"]
@@ -85,6 +85,46 @@ albedo_texture = ExtResource("6_kxgq1")
 [sub_resource type="BoxMesh" id="BoxMesh_3ahly"]
 material = SubResource("StandardMaterial3D_d1pva")
 size = Vector3(12, 0.2, 7)
+
+[sub_resource type="Gradient" id="Gradient_u2xux"]
+offsets = PackedFloat32Array(0, 0.556782, 0.791798, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.556782, 0.556782, 0.556782, 0.443218, 0.791798, 0.791798, 0.791798, 0.208202, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_52j2x"]
+gradient = SubResource("Gradient_u2xux")
+
+[sub_resource type="Curve" id="Curve_4nnvs"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jwnwc"]
+curve = SubResource("Curve_4nnvs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x7k7a"]
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 5.0
+gravity = Vector3(0, 5, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 5.0
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 5.0
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_52j2x")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("CurveTexture_jwnwc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ebv3"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_o33ok"]
+material = SubResource("StandardMaterial3D_4ebv3")
+shape = 0
 
 [node name="origin" type="Node3D"]
 
@@ -273,3 +313,14 @@ mesh = SubResource("BoxMesh_euyoy")
 offset_right = 82.0
 offset_bottom = 34.0
 scale = Vector2(2, 2)
+
+[node name="confetti" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, 0)
+emitting = false
+amount = 15
+lifetime = 2.97
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_x7k7a")
+draw_pass_1 = SubResource("RibbonTrailMesh_o33ok")
